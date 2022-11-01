@@ -1,44 +1,34 @@
 <div class="root">
-    <div class="navbar has-background-dark">
-        <div class="navbar-brand">
-            <div class="navbar-item">
-                <h1 class="app-name has-gradient-text">Kanban</h1>
-            </div>
-        </div>
+  <div class="navbar has-background-dark">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <h1 class="app-name has-gradient-text">Kanban</h1>
+      </div>
     </div>
-    <div class="board">
-        <div class="board-bar">
-            <p class="board-name">Board Name</p>
-        </div>
-        <div class="board-wrapper">
-            <div class="board-columns">
-                <div class="board-column">
-                    <div class="column-title">Ideas</div>
-                    <div class="tasks-container">
-                        <div class="task">
-                            This is something thath ı want to do!
-                        </div>
-                        <div class="task">
-                            This is something thath ı want to do!
-                        </div>
-                        <div class="task">
-                            This is something thath ı want to do!
-                        </div>
-                        <div class="task">
-                            This is something thath ı want to do!
-                        </div>
-                    </div>
-                </div>
-                <div class="board-column">
-                    <div class="column-title">Research</div>
-                </div>
-                <div class="board-column">
-                    <div class="column-title">Todo</div>
-                </div>
-                <div class="board-column">
-                    <div class="column-title">Done</div>
-                </div>
-            </div>
-        </div>
+  </div>
+  <div class="board">
+    <div class="board-bar">
+      <p class="board-name">Board Name</p>
     </div>
+    <div class="board-wrapper">
+      <div class="board-columns" cdkDropListGroup>
+        <div class="board-column" *ngFor="let column of board.columns">
+          <div class="column-title">{{column.name}}</div>
+          <div
+            class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div class="task" *ngFor="let item of column.tasks" cdkDrag>
+              {{ item }}
+            </div>
+          </div>
+        </div>
+      
+
+      
+      </div>
+    </div>
+  </div>
 </div>
